@@ -1,0 +1,18 @@
+avdcentre/
+├── index.html
+├── transport.html
+├── foods.html
+├── thumbs/
+│   ├── transport/
+│   │   ├── 1.png
+│   │   └── 2.png
+│   └── foods/
+│       ├── 1.png
+│       └── 2.png
+└── videos/
+    ├── transport/
+    │   ├── 1.mp4
+    │   └── 2.mp4
+    └── foods/
+        ├── 1.mp4
+        └── 2.mp4

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Advertisement Centre</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Hind:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f3f6fa;--surface:#fff;--ink:#14213d;--muted:#55627a;--line:#d9e0ea;--accent:#f5a400;--accent-ink:#14213d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1626;--surface:#16213a;--ink:#eef2fa;--muted:#9fb0cc;--line:#2a3a5c;--accent:#f5a400;--accent-ink:#14213d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1626;--surface:#16213a;--ink:#eef2fa;--muted:#9fb0cc;--line:#2a3a5c;--accent:#f5a400;--accent-ink:#14213d;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.55 Hind,system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;margin:0;line-height:1.1}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.brand{font:800 1.25rem "Bricolage Grotesque",sans-serif;text-decoration:none;display:flex;gap:10px;align-items:center}
+.brand i{width:28px;height:28px;border-radius:8px;background:var(--accent);display:inline-block;position:relative}
+.brand i::after{content:"";position:absolute;left:10px;top:7px;border-left:11px solid var(--accent-ink);border-top:7px solid transparent;border-bottom:7px solid transparent}
+nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:500}
+nav a:hover{color:var(--ink)}
+.hero{padding:34px 0 26px}
+.hero h1{font-size:clamp(2.2rem,6vw,4.2rem);font-weight:800;max-width:15ch;letter-spacing:-.02em}
+.hero p{color:var(--muted);max-width:52ch;font-size:1.1rem;margin:14px 0 24px}
+.search{display:flex;gap:8px;max-width:640px;background:var(--surface);border:2px solid var(--ink);border-radius:14px;padding:6px}
+.search input{flex:1;border:0;background:transparent;color:var(--ink);font:500 1.05rem Hind,sans-serif;padding:10px 12px;min-width:0}
+.search input:focus-visible{outline:none}
+.search:focus-within{box-shadow:0 0 0 4px var(--accent)}
+.btn{border:0;border-radius:10px;background:var(--accent);color:var(--accent-ink);font:700 1rem "Bricolage Grotesque",sans-serif;padding:10px 18px;cursor:pointer}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:22px 0 8px;scrollbar-width:thin}
+.chip{flex:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 15px;font:600 .95rem Hind,sans-serif;cursor:pointer;display:flex;gap:8px;align-items:center}
+.chip .dot{width:10px;height:10px;border-radius:50%;background:var(--c,var(--muted))}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bar{display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 14px}
+.bar h2{font-size:1.5rem}.bar span{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;padding-bottom:40px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;text-align:left;padding:0;color:inherit;font:inherit;display:flex;flex-direction:column}
+.card:hover{border-color:var(--ink)}
+.thumb{aspect-ratio:16/9;background:var(--c);position:relative;display:grid;place-items:center;color:#fff}
+.thumb b{font:800 1.5rem "Bricolage Grotesque",sans-serif;text-align:center;padding:0 12px;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+.play{position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92)}
+.play::after{content:"";position:absolute;left:13px;top:9px;border-left:12px solid #14213d;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.card .body{padding:12px 14px 15px}
+.card h3{font-size:1.1rem}
+.card p{margin:4px 0 8px;color:var(--muted);font-size:.95rem}
+.tag{font-size:.85rem;font-weight:600;color:var(--ink);display:inline-flex;gap:6px;align-items:center}
+.tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c)}
+.empty{grid-column:1/-1;padding:40px;border:2px dashed var(--line);border-radius:14px;text-align:center;color:var(--muted)}
+.how{border-top:1px solid var(--line);padding:32px 0 40px}
+.how ul{margin:12px 0 0;padding-left:20px;color:var(--muted);max-width:70ch}
+footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:.95rem}
+dialog{border:0;border-radius:16px;padding:0;width:min(640px,92vw);background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(8,14,28,.65)}
+.vid{aspect-ratio:16/9;background:var(--c);display:grid;place-items:center;color:#fff;text-align:center;padding:20px}
+.vid b{font:800 1.4rem "Bricolage Grotesque",sans-serif;display:block}
+.vid small{opacity:.9}
+.dbody{padding:16px 20px 20px}
+.dbody h3{font-size:1.4rem}
+.dbody p{color:var(--muted)}
+.row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn.alt{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="index.html"><i></i>Advertisement Centre</a>
+    <nav><a href="#browse">Browse</a><a href="#how">How it works</a></nav>
+  </header>
+
+  <section class="hero">
+    <h1>Watch ads by what you need</h1>
+    <p>Pick a category or search a product or company. Each category has video ads from different brands, side by side.</p>
+    <form class="search" role="search" onsubmit="return false">
+      <input id="q" type="search" placeholder="Try “school bags”, “rice”, or “scooter”" aria-label="Search advertisements" autocomplete="off">
+      <button class="btn" type="button" id="go">Search</button>
+    </form>
+  </section>
+
+  <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+
+  <section id="browse">
+    <div class="bar"><h2 id="title">All advertisements</h2><span id="count"></span></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="how" id="how">
+    <h2>How this centre will grow</h2>
+    <ul>
+      <li>This page is the central zone. Each category will get its own page with a video wall, like our Kids Zone.</li>
+      <li>Every ad shown here is a sample. Real brands, videos and links will replace them.</li>
+      <li>Example: choose Foods, then see rice, tea and snack ads from different companies together.</li>
+    </ul>
+  </section>
+</div>
+<footer><div class="wrap">Advertisement Centre. Sample content for layout review.</div></footer>
+
+<dialog id="dlg" aria-label="Advertisement preview">
+  <div class="vid" id="vid"></div>
+  <div class="dbody">
+    <h3 id="dt"></h3><p id="dd"></p>
+    <div class="row"><a class="btn" id="dl" href="#">Open category page</a><button class="btn alt" id="close" type="button">Close</button></div>
+  </div>
+</dialog>
+
+<script>
+var CATS=[
+ {id:"transport",name:"Transport",c:"#1d6fd1"},
+ {id:"households",name:"Households",c:"#0f8a6d"},
+ {id:"stationery",name:"Stationery",c:"#8a4fd0"},
+ {id:"garments",name:"Garments",c:"#d6336c"},
+ {id:"foods",name:"Foods",c:"#d9731a"},
+ {id:"education",name:"Educational",c:"#2b8a3e"},
+ {id:"electronics",name:"Electronics",c:"#3b5bdb"},
+ {id:"health",name:"Health",c:"#c2255c"}
+];
+var ADS=[
+ ["transport","Sample Motors","City Scooter 110","Easy to ride, light on fuel."],
+ ["transport","Sample Cycles","Sturdy School Cycle","Strong frame for daily rides."],
+ ["households","Sample Home Care","Spotless Floor Cleaner","Fresh clean floors in one wipe."],
+ ["households","Sample Steel Works","Pressure Cooker 5L","Cooks faster, saves gas."],
+ ["stationery","Sample Paper Co.","Smooth Writing Notebooks","Thick pages, no ink bleed."],
+ ["stationery","Sample Pens","Everyday Gel Pen Pack","Ten pens, one low price."],
+ ["garments","Sample Threads","Cotton Kurta Collection","Light and cool for summer."],
+ ["garments","Sample Footwear","Comfort School Shoes","Built for long school days."],
+ ["foods","Sample Grains","Long Grain Basmati","Fluffy rice for every meal."],
+ ["foods","Sample Tea Estate","Fresh Garden Tea","Strong taste, rich colour."],
+ ["education","Sample Academy","Class 10 Online Course","Video lessons with practice tests."],
+ ["education","Sample Learning","Spoken English Basics","Learn in 30 days at home."],
+ ["electronics","Sample Tech","LED Bulb 9W Pack","Bright light, lower bill."],
+ ["electronics","Sample Mobiles","Budget Smartphone","Big battery, clear camera."],
+ ["health","Sample Wellness","Daily Vitamin Tablets","Simple support for busy days."],
+ ["health","Sample Dental","Gentle Care Toothpaste","Fresh breath, healthy gums."]
+].map(function(a,i){var c=CATS.filter(function(x){return x.id===a[0]})[0];return{id:i,cat:c,brand:a[1],name:a[2],line:a[3]}});
+
+var state={cat:"transport",q:""},grid=document.getElementById("grid"),chips=document.getElementById("chips");
+
+function esc(s){return s.replace(/[&<>"]/g,function(m){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]})}
+
+function renderChips(){
+  var h='<button class="chip" data-c="all" aria-pressed="'+(state.cat==="all")+'">All</button>';
+  CATS.forEach(function(c){
+    
+    h+='<button class="chip" style="--c:'+c.c+'" data-c="'+c.id+'" aria-pressed="'+(state.cat===c.id)+'"><span class="dot"></span>'+c.name+'</button>';
+  });
+  chips.innerHTML=h;
+}
+
+function render(){
+  var q=state.q.trim().toLowerCase();
+  var list=ADS.filter(function(a){
+    if(state.cat!=="all"&&a.cat.id!==state.cat)return false;
+    return !q||(a.brand+" "+a.name+" "+a.line+" "+a.cat.name).toLowerCase().indexOf(q)>-1;
+  });
+  var cn=state.cat==="all"?"All advertisements":CATS.filter(function(c){return c.id===state.cat})[0].name;
+  document.getElementById("title").textContent=cn;
+  document.getElementById("count").textContent=list.length+(list.length===1?" ad":" ads");
+  if(!list.length){grid.innerHTML='<div class="empty">No ads match “'+esc(state.q)+'”. Try another word or choose All.</div>';return}
+  grid.innerHTML=list.map(function(a){
+    return '<button class="card" data-id="'+a.id+'" style="--c:'+a.cat.c+'"><div class="thumb"><b>'+esc(a.name)+'</b><span class="play"></span></div>'+
+    '<div class="body"><h3>'+esc(a.brand)+'</h3><p>'+esc(a.line)+'</p><span class="tag">'+a.cat.name+'</span></div></button>';
+  }).join("");
+}
+
+chips.addEventListener("click",function(e){
+  var b=e.target.closest(".chip");if(!b)return;
+  state.cat=b.dataset.c;renderChips();render();
+});
+document.getElementById("q").addEventListener("input",function(e){state.q=e.target.value;render()});
+document.getElementById("go").addEventListener("click",function(){document.getElementById("browse").scrollIntoView({behavior:"smooth"})});
+
+var dlg=document.getElementById("dlg");
+grid.addEventListener("click",function(e){
+  var b=e.target.closest(".card");if(!b)return;
+  var a=ADS[+b.dataset.id];
+  var v=document.getElementById("vid");v.style.setProperty("--c",a.cat.c);
+  v.innerHTML='<div><b>'+esc(a.name)+'</b><small>Video ad will play here</small></div>';
+  document.getElementById("dt").textContent=a.brand+": "+a.name;
+  document.getElementById("dd").textContent=a.line+" Category: "+a.cat.name+".";
+  document.getElementById("dl").href="#"+a.cat.id;
+  if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","");
+});
+document.getElementById("close").addEventListener("click",function(){dlg.close()});
+dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
+document.getElementById("dl").addEventListener("click",function(e){e.preventDefault();var id=this.getAttribute("href").slice(1);state.cat=id;renderChips();render();dlg.close();document.getElementById("browse").scrollIntoView({behavior:"smooth"})});
+
+renderChips();render();
+</script>
+</body>
+</html>
